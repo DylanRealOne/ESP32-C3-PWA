@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nexus Config PWA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #007bff; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        #status { margin-top: 20px; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Nexus Config</h2>
+        <input id="ssid" placeholder="WiFi Name (SSID)">
+        <input id="pass" type="password" placeholder="WiFi Password">
+        <input id="api" placeholder="Nexus API Key">
+        <input id="site" placeholder="Site ID">
+        <button onclick="connectBLE()">Send via Bluetooth</button>
+        <div id="status">Disconnected</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
