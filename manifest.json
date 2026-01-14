@@ -1,16 +1,21 @@
 {
-  "short_name": "NexusNode",
-  "name": "Nexus Node Hardware Controller",
-  "description": "Configure Nexus ESP32-C3 Nodes via Bluetooth",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
+  "name": "Nexus Node Provisioning",
+  "short_name": "Nexus",
   "start_url": "./index.html",
   "display": "standalone",
+  "background_color": "#ffffff",
   "theme_color": "#007bff",
-  "background_color": "#ffffff"
+  "description": "Configuration tool for StringSense HSTS016L sensors.",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
