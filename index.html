@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><title>NEXUS PRO</title></head>
-<body>
-    <h2>NODE PROVISIONING</h2>
-    <button onclick="connectBLE()">1. CONNECT BLUETOOTH</button>
-    <p id="stat">Status: Disconnected</p>
-    <hr>
-    <input id="s" placeholder="WiFi SSID"><br>
-    <input id="p" type="password" placeholder="Password"><br>
-    <input id="i" placeholder="Site ID (NXS377)"><br>
-    <button onclick="sendConfig()">2. SAVE TO NODE</button>
+<head><title>Nexus Deployment</title></head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px; background: #f4f4f4;">
+    <div style="display: inline-block; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h2>Nexus Device Config</h2>
+        <button onclick="connectBLE()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px;">1. Connect Bluetooth</button>
+        <hr>
+        <input type="text" id="ssid" placeholder="WiFi SSID" style="width: 80%; padding: 8px; margin: 5px;"><br>
+        <input type="password" id="pass" placeholder="WiFi Password" style="width: 80%; padding: 8px; margin: 5px;"><br>
+        <input type="text" id="key" placeholder="API Key" style="width: 80%; padding: 8px; margin: 5px;"><br>
+        <input type="text" id="site" placeholder="Site ID" style="width: 80%; padding: 8px; margin: 5px;"><br>
+        <select id="mode" style="width: 85%; padding: 8px; margin: 5px;">
+            <option value="0">Development</option>
+            <option value="1">Production</option>
+        </select><br>
+        <button onclick="sendConfig()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; margin-top: 10px;">2. Save & Deploy</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
