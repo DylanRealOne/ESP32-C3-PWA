@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nexus Deployment</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background: #f0f2f5; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 100%; max-width: 400px; text-align: center; }
+        button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .hidden { display: none; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Nexus Node Setup</h2>
+        <div id="step1">
+            <p>Step 1: Connect to Hardware</p>
+            <button id="pairBtn">CONNECT TO BLUETOOTH</button>
+        </div>
+        <div id="step2" class="hidden">
+            <p>Step 2: Configure WiFi</p>
+            <input type="text" id="s" placeholder="WiFi SSID">
+            <input type="password" id="p" placeholder="Password">
+            <input type="text" id="k" placeholder="API Key">
+            <button id="sendBtn" style="background: #28a745;">SAVE & REBOOT</button>
+        </div>
+        <p id="status">Status: Ready</p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
