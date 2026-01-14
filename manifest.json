@@ -1,21 +1,8 @@
 {
-  "name": "Nexus Node Provisioning",
-  "short_name": "Nexus",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#007bff",
-  "description": "Configuration tool for StringSense HSTS016L sensors.",
-  "icons": [
-    {
-      "src": "https://via.placeholder.com/192",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://via.placeholder.com/512",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "sensor_name": "HSTS016L",
+  "sensor_data": 24.5,
+  "sensor_type": "StringSense",
+  "site_id": "NXS377",
+  "ip_address": "192.168.1.50",
+  "mac_address": "AA:BB:CC:DD:EE:FF"
 }
