@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Control</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        body{font-family:sans-serif; text-align:center; padding:20px; background:#f4f4f4;}
-        .card{background:white; padding:20px; border-radius:10px; max-width:400px; margin:auto; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
-        input, select, button{width:100%; padding:12px; margin:8px 0; border-radius:5px; border:1px solid #ccc; box-sizing:border-box;}
-        button{background:#007bff; color:white; font-weight:bold; cursor:pointer; border:none;}
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f8f9fa; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 450px; margin: auto; }
+        .btn-blue { background: #007bff; color: white; border: none; padding: 20px; width: 100%; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; }
+        .btn-green { background: #28a745; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        #config-zone { display: none; margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Nexus Node Setup</h2>
-        <button onclick="connectBLE()">1. CONNECT BLUETOOTH</button>
-        <hr>
-        <input id="s" placeholder="WiFi Name">
-        <input id="p" type="password" placeholder="WiFi Password">
-        <input id="k" placeholder="API Key">
-        <input id="i" placeholder="Site ID (e.g. NXS377)">
-        <select id="m"><option value="0">Dev Mode</option><option value="1">Prod Mode</option></select>
-        <button style="background:#28a745" onclick="sendConfig()">2. SAVE TO NODE</button>
-        <p id="stat">Status: Ready</p>
+
+<div class="card">
+    <h2>Nexus Control</h2>
+    <p>Bluetooth hardware must be active.</p>
+    
+    <button id="pairBtn" class="btn-blue">ACTIVATE BLUETOOTH PAIRING</button>
+    
+    <div id="config-zone">
+        <h3>Node Configuration</h3>
+        <input type="text" id="s" placeholder="WiFi SSID">
+        <input type="password" id="p" placeholder="WiFi Password">
+        <input type="text" id="k" placeholder="Nexus API Key">
+        <input type="text" id="i" placeholder="Site ID (e.g., NXS377)">
+        <button id="sendBtn" class="btn-green">SAVE TO HARDWARE</button>
     </div>
-    <script src="app.js"></script>
+    
+    <p id="status">STATUS: READY</p>
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').then(() => console.log("PWA Active"));
+    }
+</script>
+<script src="app.js"></script>
 </body>
 </html>
