@@ -1,49 +1,77 @@
 let characteristic;
 const SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
 const CHAR_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8";
+
 function updateStatus(msg, isError = false) {
     const el = document.getElementById('statusMessage');
     el.innerText = msg;
     el.style.color = isError ? 'red' : '#6b7280';
 }
+
 async function connectBLE() {
+    // Check for Web Bluetooth support
+    if (!navigator.bluetooth) {
+        alert("Web Bluetooth is not supported in this browser! Please use Chrome, Edge, or Bluefy (on iOS).");
+        updateStatus("Error: Web Bluetooth not supported.", true);
+        return;
+    }
+
     try {
-        updateStatus("Requesting device...");
+        updateStatus("Requesting device... Check for popup.");
         const device = await navigator.bluetooth.requestDevice({
             filters: [{ namePrefix: 'NEXUS' }],
             optionalServices: [SERVICE_UUID]
         });
+
+        if (!device) {
+            throw new Error("No device selected.");
+        }
+
         device.addEventListener('gattserverdisconnected', onDisconnected);
+
         updateStatus("Connecting to GATT Server...");
         const server = await device.gatt.connect();
+
         updateStatus("Getting Service...");
         const service = await server.getPrimaryService(SERVICE_UUID);
+
         updateStatus("Getting Characteristic...");
         characteristic = await service.getCharacteristic(CHAR_UUID);
+
         updateStatus("Connected! Ready to configure.", false);
         document.getElementById('saveBtn').disabled = false;
         document.getElementById('btIcon').innerText = "✅";
         
     } catch (error) {
-        console.error(error);
-        updateStatus("Connection failed: " + error, true);
+        console.error("BLE Connect Error:", error);
+        if (error.name === 'NotFoundError') {
+             updateStatus("Cancelled: No device selected.", true);
+        } else if (error.name === 'SecurityError') {
+             updateStatus("Security Error: HTTPS or Localhost required.", true);
+             alert("Security Error: Web Bluetooth requires HTTPS or Localhost.");
+        } else {
+             updateStatus("Connection failed: " + error.message, true);
+        }
     }
 }
+
 function onDisconnected() {
     updateStatus("Device disconnected.", true);
     characteristic = null;
     document.getElementById('saveBtn').disabled = true;
     document.getElementById('btIcon').innerText = "📡";
 }
+
 async function sendConfig() {
     if (!characteristic) {
         alert("Please pair via Bluetooth first!");
         return;
     }
+
     // Basic Validation
     const ssid = document.getElementById('ssid').value;
     const pass = document.getElementById('pass').value;
-    if(!ssid || !pass) {
+    if (!ssid || !pass) {
         updateStatus("Error: WiFi SSID and Password required", true);
         return;
     }
@@ -55,6 +83,7 @@ async function sendConfig() {
         i: document.getElementById('site').value,
         m: document.getElementById('mode').value
     };
+
     const encoder = new TextEncoder();
     const payload = encoder.encode(JSON.stringify(data));
     
@@ -71,14 +100,17 @@ async function sendConfig() {
         document.getElementById('saveBtn').disabled = false;
     }
 }
+
 // Function to send data in 20-byte chunks to respect BLE MTU
 async function sendChunkedData(characteristic, data) {
     const CHUNK_SIZE = 20;
     const totalChunks = Math.ceil(data.length / CHUNK_SIZE);
+
     for (let i = 0; i < totalChunks; i++) {
         const start = i * CHUNK_SIZE;
         const end = Math.min(start + CHUNK_SIZE, data.length);
         const chunk = data.slice(start, end);
+
         updateStatus(`Sending chunk ${i + 1}/${totalChunks}...`);
         
         // Write chunk and wait for acknowledgement
