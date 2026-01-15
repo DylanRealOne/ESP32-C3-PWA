@@ -12,7 +12,6 @@
             --card-bg: #ffffff;
             --text-color: #1f2937;
         }
-
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
@@ -23,7 +22,6 @@
             min-height: 100vh;
             margin: 0;
         }
-
         .container {
             background: var(--card-bg);
             padding: 2rem;
@@ -33,29 +31,28 @@
             max-width: 400px;
             text-align: center;
         }
-
         h2 {
             margin-bottom: 1.5rem;
             color: var(--primary-color);
             font-weight: 700;
         }
-
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 0.75rem;
             margin: 0.5rem 0;
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
-            box-sizing: border-box; /* Fix padding issues */
+            box-sizing: border-box;
+            /* Fix padding issues */
             transition: border-color 0.2s;
         }
-
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: var(--primary-color);
             ring: 2px solid var(--primary-color);
         }
-
         button {
             width: 100%;
             padding: 0.75rem;
@@ -66,28 +63,24 @@
             cursor: pointer;
             transition: transform 0.1s, opacity 0.2s;
         }
-
         button:active {
             transform: scale(0.98);
         }
-
         .btn-connect {
             background-color: var(--primary-color);
             color: white;
         }
-
         .btn-save {
             background-color: var(--success-color);
             color: white;
         }
-
         .status {
             margin-top: 1rem;
             font-size: 0.875rem;
             color: #6b7280;
-            min-height: 1.25em; /* Prevent layout jump */
+            min-height: 1.25em;
+            /* Prevent layout jump */
         }
-        
         hr {
             border: 0;
             height: 1px;
@@ -95,18 +88,16 @@
             margin: 1.5rem 0;
         }
     </style>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
         <h2>Nexus Device Config</h2>
         <div id="statusMessage" class="status">Ready to connect</div>
-        
         <button onclick="connectBLE()" class="btn-connect">
             <span id="btIcon">📡</span> Connect Bluetooth
         </button>
-        
         <hr>
-        
         <input type="text" id="ssid" placeholder="WiFi SSID">
         <input type="password" id="pass" placeholder="WiFi Password">
         <input type="text" id="key" placeholder="API Key">
@@ -115,11 +106,16 @@
             <option value="0">Development</option>
             <option value="1">Production</option>
         </select>
-        
         <button onclick="sendConfig()" class="btn-save" id="saveBtn" disabled>
             💾 Save & Deploy
         </button>
     </div>
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker Registered'));
+        }
+    </script>
 </body>
 </html>
