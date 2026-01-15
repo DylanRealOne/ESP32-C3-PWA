@@ -12,6 +12,7 @@
             --card-bg: #ffffff;
             --text-color: #1f2937;
         }
+
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
@@ -22,6 +23,7 @@
             min-height: 100vh;
             margin: 0;
         }
+
         .container {
             background: var(--card-bg);
             padding: 2rem;
@@ -31,11 +33,13 @@
             max-width: 400px;
             text-align: center;
         }
+
         h2 {
             margin-bottom: 1.5rem;
             color: var(--primary-color);
             font-weight: 700;
         }
+
         input, select {
             width: 100%;
             padding: 0.75rem;
@@ -45,11 +49,13 @@
             box-sizing: border-box; /* Fix padding issues */
             transition: border-color 0.2s;
         }
+
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary-color);
             ring: 2px solid var(--primary-color);
         }
+
         button {
             width: 100%;
             padding: 0.75rem;
@@ -60,17 +66,21 @@
             cursor: pointer;
             transition: transform 0.1s, opacity 0.2s;
         }
+
         button:active {
             transform: scale(0.98);
         }
+
         .btn-connect {
             background-color: var(--primary-color);
             color: white;
         }
+
         .btn-save {
             background-color: var(--success-color);
             color: white;
         }
+
         .status {
             margin-top: 1rem;
             font-size: 0.875rem;
