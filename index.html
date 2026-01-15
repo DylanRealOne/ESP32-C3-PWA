@@ -1,20 +1,114 @@
 <!DOCTYPE html>
-<html>
-<head><title>Nexus Deployment</title></head>
-<body style="font-family: sans-serif; text-align: center; padding-top: 50px; background: #f4f4f4;">
-    <div style="display: inline-block; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Deployment</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #10b981;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-sizing: border-box; /* Fix padding issues */
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            ring: 2px solid var(--primary-color);
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .btn-connect {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .btn-save {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .status {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            min-height: 1.25em; /* Prevent layout jump */
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e5e7eb;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
         <h2>Nexus Device Config</h2>
-        <button onclick="connectBLE()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px;">1. Connect Bluetooth</button>
+        <div id="statusMessage" class="status">Ready to connect</div>
+        
+        <button onclick="connectBLE()" class="btn-connect">
+            <span id="btIcon">📡</span> Connect Bluetooth
+        </button>
+        
         <hr>
-        <input type="text" id="ssid" placeholder="WiFi SSID" style="width: 80%; padding: 8px; margin: 5px;"><br>
-        <input type="password" id="pass" placeholder="WiFi Password" style="width: 80%; padding: 8px; margin: 5px;"><br>
-        <input type="text" id="key" placeholder="API Key" style="width: 80%; padding: 8px; margin: 5px;"><br>
-        <input type="text" id="site" placeholder="Site ID" style="width: 80%; padding: 8px; margin: 5px;"><br>
-        <select id="mode" style="width: 85%; padding: 8px; margin: 5px;">
+        
+        <input type="text" id="ssid" placeholder="WiFi SSID">
+        <input type="password" id="pass" placeholder="WiFi Password">
+        <input type="text" id="key" placeholder="API Key">
+        <input type="text" id="site" placeholder="Site ID">
+        <select id="mode">
             <option value="0">Development</option>
             <option value="1">Production</option>
-        </select><br>
-        <button onclick="sendConfig()" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; margin-top: 10px;">2. Save & Deploy</button>
+        </select>
+        
+        <button onclick="sendConfig()" class="btn-save" id="saveBtn" disabled>
+            💾 Save & Deploy
+        </button>
     </div>
     <script src="script.js"></script>
 </body>
