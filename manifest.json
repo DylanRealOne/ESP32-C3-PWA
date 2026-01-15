@@ -1,8 +1,21 @@
 {
-  "sensor_name": "HSTS016L",
-  "sensor_data": 24.5,
-  "sensor_type": "StringSense",
-  "site_id": "NXS377",
-  "ip_address": "192.168.1.50",
-  "mac_address": "AA:BB:CC:DD:EE:FF"
+    "name": "Nexus Device Config",
+    "short_name": "NexusConfig",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f3f4f6",
+    "theme_color": "#2563eb",
+    "description": "Configuration tool for Nexus Hall-Effect Sensors",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/2885/2885417.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/2885/2885417.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }
